@@ -1,34 +1,29 @@
 import 'package:flutter/material.dart';
 
-class NavigationContainer extends StatefulWidget {
-  NavigationContainer({Key? key, required this.title, required this.icon})
-    : super(key: key);
+class NavigationContainer extends StatelessWidget {
+  const NavigationContainer({
+    Key? key,
+    required this.title,
+    required this.icon,
+    required this.isSelected,
+    required this.onTap,
+  }) : super(key: key);
 
   final String title;
   final IconData icon;
-
-  @override
-  _NavigationContainerState createState() => _NavigationContainerState();
-}
-
-class _NavigationContainerState extends State<NavigationContainer> {
-  Color containerColor = Color(0xFF171A1F);
-  Color pressedColor = const Color.fromARGB(255, 5, 63, 170);
-
-  String selectedTitle = '';
+  final bool isSelected;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedTitle = widget.title;
-        });
-      },
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          color: containerColor,
+          color: isSelected
+              ? const Color.fromARGB(255, 5, 63, 170)
+              : const Color(0xFF171A1F),
         ),
         height: 80,
         width: 80,
@@ -36,12 +31,9 @@ class _NavigationContainerState extends State<NavigationContainer> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(widget.icon, color: Colors.white),
+              Icon(icon, color: Colors.white),
               SizedBox(height: 5),
-              Text(
-                widget.title,
-                style: TextStyle(color: Colors.white, fontSize: 15),
-              ),
+              Text(title, style: TextStyle(color: Colors.white, fontSize: 15)),
             ],
           ),
         ),

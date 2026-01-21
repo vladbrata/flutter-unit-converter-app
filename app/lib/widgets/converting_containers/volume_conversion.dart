@@ -1,21 +1,21 @@
 import 'package:app/utils/conversion_utils.dart';
 import 'package:flutter/material.dart';
 
-class LengthConversion extends StatefulWidget {
-  const LengthConversion({Key? key, required this.clearTrigger})
+class VolumeConversion extends StatefulWidget {
+  const VolumeConversion({Key? key, required this.clearTrigger})
     : super(key: key);
 
   final ValueNotifier<int> clearTrigger;
 
   @override
-  State<LengthConversion> createState() => _LengthConversionState();
+  State<VolumeConversion> createState() => _VolumeConversionState();
 }
 
-class _LengthConversionState extends State<LengthConversion> {
+class _VolumeConversionState extends State<VolumeConversion> {
   Color containerColor = Color(0xFF171A1F);
   TextEditingController inputController = TextEditingController();
-  String fromUnit = 'cm';
-  String toUnit = 'cm';
+  String fromUnit = 'l';
+  String toUnit = 'l';
   String result = '';
 
   @override
@@ -46,7 +46,7 @@ class _LengthConversionState extends State<LengthConversion> {
       return;
     }
     double value = double.tryParse(inputController.text) ?? 0.0;
-    double converted = ConversionUtils.convertLength(value, fromUnit, toUnit);
+    double converted = ConversionUtils.convertVolume(value, fromUnit, toUnit);
     setState(() {
       result = converted.toStringAsFixed(2);
     });
@@ -116,9 +116,9 @@ class _LengthConversionState extends State<LengthConversion> {
                     dropdownColor: containerColor,
                     value: fromUnit,
                     items: [
-                      DropdownMenuItem(value: 'cm', child: Text('cm')),
-                      DropdownMenuItem(value: 'm', child: Text('m')),
-                      DropdownMenuItem(value: 'km', child: Text('km')),
+                      DropdownMenuItem(value: 'ml', child: Text('ml')),
+                      DropdownMenuItem(value: 'l', child: Text('l')),
+                      DropdownMenuItem(value: 'gal', child: Text('gal')),
                     ],
                     onChanged: (value) {
                       setState(() {
@@ -131,7 +131,7 @@ class _LengthConversionState extends State<LengthConversion> {
                       fontWeight: FontWeight.bold,
                     ),
                     decoration: InputDecoration(
-                      hintText: "cm",
+                      hintText: "l",
                       hintStyle: const TextStyle(
                         color: Color.fromARGB(255, 68, 138, 255),
                       ),
@@ -194,9 +194,9 @@ class _LengthConversionState extends State<LengthConversion> {
                     dropdownColor: containerColor,
                     value: toUnit,
                     items: [
-                      DropdownMenuItem(value: 'cm', child: Text('cm')),
-                      DropdownMenuItem(value: 'm', child: Text('m')),
-                      DropdownMenuItem(value: 'km', child: Text('km')),
+                      DropdownMenuItem(value: 'ml', child: Text('ml')),
+                      DropdownMenuItem(value: 'l', child: Text('l')),
+                      DropdownMenuItem(value: 'gal', child: Text('gal')),
                     ],
                     onChanged: (value) {
                       setState(() {
@@ -209,7 +209,7 @@ class _LengthConversionState extends State<LengthConversion> {
                       fontWeight: FontWeight.bold,
                     ),
                     decoration: InputDecoration(
-                      hintText: "cm",
+                      hintText: "l",
                       hintStyle: const TextStyle(color: Colors.blueAccent),
                       filled: true,
                       fillColor: Colors.black26,
